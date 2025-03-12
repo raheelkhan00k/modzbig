@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Downloader</title>
+</head>
+<body>
+    <h1>Game Downloader</h1>
+    <form method="POST" action="">
+        <label for="game_name">Enter Game Name:</label>
+        <input type="text" id="game_name" name="game_name" required>
+        <button type="submit" name="search">Search</button>
+    </form>
+
+    <?php
+    if (isset($_POST['search'])) {
+        $game_name = $_POST['game_name'];
+        include 'game_downloader.php'; // PHP logic file
+    }
+    ?>
+</body>
+</html>
