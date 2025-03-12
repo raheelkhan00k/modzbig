@@ -7,17 +7,28 @@
 </head>
 <body>
     <h1>Game Downloader</h1>
-    <form method="POST" action="">
+    <form id="gameForm">
         <label for="game_name">Enter Game Name:</label>
         <input type="text" id="game_name" name="game_name" required>
-        <button type="submit" name="search">Search</button>
+        <button type="submit">Search</button>
     </form>
 
-    <?php
-    if (isset($_POST['search'])) {
-        $game_name = $_POST['game_name'];
-        include 'game_downloader.php'; // PHP logic file
-    }
-    ?>
+    <div id="result"></div>
+
+    <script>
+    document.querySelector("#gameForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        let game_name = document.querySelector("#game_name").value;
+
+        fetch("https://gamedva.cc/game_downloader.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: `game_name=${encodeURIComponent(game_name)}`
+        })
+        .then(response => response.text())
+        .then(data => document.querySelector("#result").innerHTML = data)
+        .catch(error => console.error("Error:", error));
+    });
+    </script>
 </body>
 </html>
